@@ -83,7 +83,7 @@ public class TheSystem {
 				
 				io.getLog().info("Cumulative Job ID: 1 (decimal)");
 				
-				LoaderContext context = loader.loader(file);
+				LoaderContext context = loader.load(file);
 				/* assign the last instruction word as start address word*/ 
 				Word pc = context.instructionWord;
 				
@@ -94,7 +94,7 @@ public class TheSystem {
 					io.getLog().trace(TraceFormatter.getTraceHeader());
 				}
 				
-				cpu.cpu(pc, context.traceSwitch);
+				cpu.run(pc, context.traceSwitch);
 				
 			}finally{
 				

@@ -34,7 +34,7 @@ public class ControlUnit {
 		
 		Word pc = cpu.registers[CPU.R_PC];
 		
-		memory.memory(Memory.Signal.READ, pc, cpu.mbr);
+		memory.transfer(Memory.Signal.READ, pc, cpu.mbr);
 		
 		Word.copy(cpu.mbr, cpu.registers[CPU.R_IR]);
 		

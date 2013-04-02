@@ -75,9 +75,9 @@ public class Memory {
 	 * @param memoryAddr (EA)
 	 * @param variable - may be a register used by the CPU or may be a buffer used by the LOADER
 	 */
-	public void memory(Signal signal, Word memoryAddr, Word variable){
+	public void transfer(Signal signal, Word memoryAddr, Word variable){
 		int memoryIdx = Bit.toDecimal(memoryAddr.getBits());
-		memory(signal, memoryIdx, variable);
+		transfer(signal, memoryIdx, variable);
 	}
 	
 	/**
@@ -86,7 +86,7 @@ public class Memory {
 	 * @param memoryIdx
 	 * @param variable
 	 */
-	public void memory(Signal signal, int memoryIdx, Word variable){
+	public void transfer(Signal signal, int memoryIdx, Word variable){
 		
 		if(signal == Signal.READ || signal == Signal.WRIT){
 			if(variable==null){

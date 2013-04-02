@@ -68,7 +68,7 @@ public class ErrorHandler {
 		io.getLog().info("Terminated with error no. "+errorNumber);
 		io.getLog().info("Description: "+message);
 		
-		memory.memory(Signal.DUMP, 0, null);
+		memory.transfer(Signal.DUMP, 0, null);
 		
 	}
 	

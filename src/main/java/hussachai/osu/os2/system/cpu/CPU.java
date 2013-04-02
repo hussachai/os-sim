@@ -117,9 +117,9 @@ public class CPU {
 	public int getOutputTime(){ return this.outputTime; }
 	
 	/**
-	 * Specification required method name.
+	 * Specification required method.
 	 */
-	public void cpu(Word pc, Bit traceSwitch){
+	public void run(Word pc, Bit traceSwitch){
 		
 		this.registers[R_PC] = pc;
 		this.traceSwitch = traceSwitch;
@@ -162,13 +162,13 @@ public class CPU {
 			traceInfo = trace(pc, instruction, targetR);
 			
 			if(ea!=null){
-				memory.memory(Signal.READ, ea, tmp2);
+				memory.transfer(Signal.READ, ea, tmp2);
 				traceInfo += trace(ea);
 			}else{
 				traceInfo += traceEmpty();
 			}
 			
-			memory.memory(Signal.READ, targetR, tmp1);
+			memory.transfer(Signal.READ, targetR, tmp1);
 			
 			traceInfo += trace(tmp1);
 			if(ea!=null){
@@ -184,10 +184,10 @@ public class CPU {
 		hasNext = alUnit.execute(opCode);
 		
 		if(traceSwitch==Bit.I){
-			memory.memory(Signal.READ, targetR, tmp1);
+			memory.transfer(Signal.READ, targetR, tmp1);
 			traceInfo += trace(tmp1);
 			if(ea!=null){
-				memory.memory(Signal.READ, ea, tmp2);
+				memory.transfer(Signal.READ, ea, tmp2);
 				traceInfo += trace(tmp2);
 			}else{
 				traceInfo += traceEmpty();

@@ -75,11 +75,11 @@ public class Loader {
 	 * 
 	 * The new line(\n) and carriage return (\r) are ignore by loader.
 	 * 
-	 * [Specification required method]
+	 * Specification required method.
 	 * 
 	 * return start address (PC)
 	 */
-	public LoaderContext loader(File file){
+	public LoaderContext load(File file){
 		
 		LoaderContext context = new LoaderContext();
 		BufferedReader bin = null;
@@ -109,7 +109,7 @@ public class Loader {
 		
 		flushBuffer(context);//make sure that there's nothing left in buffer.
 		
-		memory.memory(Signal.WRIT, context.memoryIndex-1, new Word());//erase PC from memory
+		memory.transfer(Signal.WRIT, context.memoryIndex-1, new Word());//erase PC from memory
 		
 		if(context.charCounter%3==0){
 			int lengthCheck = Bit.toDecimal(context.checkLengthWord.getBits());
@@ -187,7 +187,7 @@ public class Loader {
 	private void flushBuffer(LoaderContext context){
 		Word words[] = buffer.flush();
 		for(Word word: words){
-			memory.memory(Memory.Signal.WRIT, context.memoryIndex, word);
+			memory.transfer(Memory.Signal.WRIT, context.memoryIndex, word);
 			context.memoryIndex++;
 		}
 	}

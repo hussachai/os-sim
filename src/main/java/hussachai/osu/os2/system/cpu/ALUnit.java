@@ -57,18 +57,18 @@ public class ALUnit {
 			if(bitI==Bit.I){
 				if(bitX==Bit.I){
 					/* indirection + indexing addressing */
-					memory.memory(Signal.READ, a, tmp1);
-					memory.memory(Signal.READ, r4, tmp2);
+					memory.transfer(Signal.READ, a, tmp1);
+					memory.transfer(Signal.READ, r4, tmp2);
 					add(tmp1.getBits(), tmp2.getBits(), false);
 					Word.copy(tmp1, cpu.mar);
 				}else{
 					/* indirection addressing */
-					memory.memory(Signal.READ, a, cpu.mar);
+					memory.transfer(Signal.READ, a, cpu.mar);
 				}
 			}else{
 				if(bitX==Bit.I){
 					/* indexing addressing */
-					memory.memory(Signal.READ, r4, tmp2);
+					memory.transfer(Signal.READ, r4, tmp2);
 					add(a.getBits(), tmp2.getBits(), false);
 					Word.copy(a, cpu.mar);
 				}else{
@@ -82,18 +82,18 @@ public class ALUnit {
 		switch(opCode){
 		/* Type I */
 		case AND:
-			memory.memory(Signal.READ, ea, tmp1);
+			memory.transfer(Signal.READ, ea, tmp1);
 			and(targetR, tmp1);
 			break;
 		case ADD:
-			memory.memory(Signal.READ, ea, tmp1);
+			memory.transfer(Signal.READ, ea, tmp1);
 			add(targetR, tmp1);
 			break;
 		case STR:
-			memory.memory(Signal.WRIT, ea, targetR);
+			memory.transfer(Signal.WRIT, ea, targetR);
 			break;
 		case LD:
-			memory.memory(Signal.READ, ea, targetR);
+			memory.transfer(Signal.READ, ea, targetR);
 			break;
 		case JMP:
 			Word.copy(ea, pc);
