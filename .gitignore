@@ -16,5 +16,7 @@ target/
 .classpath
 .project
 
+src/test/java/Main.java
+
 bash.exe.stackdump
 
